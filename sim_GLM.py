@@ -20,8 +20,6 @@ def sim_GLM(s, f, h, b):
 		l = x[i - len(h)] + b
 		for j in range(len(h)):
 			l += y[i - j - 1] * h[j]
-		if l > 25:
-			l = 25
 		# ensure no more than one spike per bin
 		y[i] = min(np.random.poisson(math.exp(l)), 1)
 	# return the spike history sans zero padding

@@ -1,0 +1,4 @@
+the following packages are used:
+matplotlib   for pyplot plotting utilities
+numpy        for operations on arrays
+statsmodels  for GLM model fitting
