@@ -1,6 +1,5 @@
 import math
 import numpy as np
-import statsmodels.api as sm
 
 def sim_GLM(s, f, h, b):
 	''' takes stimulus s, stimulus filter f, self interaction filter h, offset b
