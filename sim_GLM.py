@@ -2,9 +2,10 @@ import math
 import numpy as np
 import statsmodels.api as sm
 
-# takes stimulus s, stimulus filter f, self interaction filter h, offset b
-# returns simulated results of GLM
 def sim_GLM(s, f, h, b):
+	''' takes stimulus s, stimulus filter f, self interaction filter h, offset b
+	returns simulated results of GLM
+	'''
 	# the formula in section 3 suggests only past values in the stimulus are used
 	# this makes sense in the case of the self interaction filter, but not stimulus filter
 	# I suggest we ask in class whether the stimulus filter extends from t=0 or t=1
@@ -21,9 +22,7 @@ def sim_GLM(s, f, h, b):
 			l += y[i - j - 1] * h[j]
 		if l > 25:
 			l = 25
-		y[i] = np.random.poisson(math.exp(l))
-		# the instructions dictate we are to ensure no more than one spike per bin
-		if y[i] > 1:
-			y[i] = 1
+		# ensure no more than one spike per bin
+		y[i] = min(np.random.poisson(math.exp(l)), 1)
 	# return the spike history sans zero padding
 	return y[len(h):]
