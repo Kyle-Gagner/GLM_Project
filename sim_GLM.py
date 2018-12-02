@@ -19,8 +19,6 @@ def sim_GLM(s, f, h, b):
 		l = x[i - len(h)] + b
 		for j in range(len(h)):
 			l += y[i - j - 1] * h[j]
-		if l > 25:
-			l = 25
 		y[i] = np.random.poisson(math.exp(l))
 		# the instructions dictate we are to ensure no more than one spike per bin
 		if y[i] > 1:
