@@ -29,11 +29,12 @@ def do_4_1():
 	plt.plot(y)
 	plt.title('response')
 	plt.tight_layout()
-	plt.show()
-	return (s, y)
+	plt.draw()
+	return (plt, s, y)
 
-def do_4_2(s, n):
+def do_4_2(plt, s, n):
 	fit_GLM(s, n, 15)	
 
-s, n = do_4_1()
-do_4_2(s, n)
+plt, s, n = do_4_1()
+do_4_2(plt, s, n)
+plt.show()
