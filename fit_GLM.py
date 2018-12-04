@@ -9,8 +9,13 @@ def fit_GLM(s, n, d):
 	exog = get_exog(s, n, d)
 	endog = n[d:]
 	model_results = sm.GLM(endog, exog, family=sm.families.Poisson()).fit()
-	print(model_results.summary())
-	print(model_results.bse)
+	h = model_results.params[:d]
+	f = model_results.params[d:-1]
+	b = model_results.params[-1]
+	se_h = model_results.bse[:d]
+	se_f = model_results.bse[d:-1]
+	se_b = model_results.bse[-1]
+	return (f, h, b, se_f, se_h, se_b)
 
 def get_exog(s, n, d):
 	'''takes stimulus s, spiking response n, filter length d
