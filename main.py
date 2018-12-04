@@ -2,6 +2,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 from sim_GLM import *
+from fit_GLM import *
 
 def do_4_1():
 	print("4.1 Simulating a GLM")
@@ -29,5 +30,10 @@ def do_4_1():
 	plt.title('response')
 	plt.tight_layout()
 	plt.show()
+	return (s, y)
 
-do_4_1()
+def do_4_2(s, n):
+	fit_GLM(s, n, 15)	
+
+s, n = do_4_1()
+do_4_2(s, n)
