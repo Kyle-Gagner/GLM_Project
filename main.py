@@ -50,6 +50,7 @@ def do_4():
 	plt.show()
 	
 	# section 4.3
+	print("4.3 GLM Performance")
 	# these lists will contain the data points for each row of plots
 	data_by_length = []
 	data_by_spikes = []
@@ -62,14 +63,14 @@ def do_4():
 	mse_f = 4
 	mse_h = 5
 	# compute data for the first two rows of plots
-	for l in np.repeat([int(x) for x in [1e3, 3e3, 1e4, 3e4]], 6):
+	for l in np.repeat([int(x) for x in [1e3, 3e3, 1e4, 3e4]], 1):
 		s = sigma * np.random.randn(l) + mu
 		n = sim_GLM(s, f, h, b)
 		data = fitter_trial(s, n, f, h, b)
 		data_by_length.append((l, *data))
 		data_by_spikes.append((sum(n), *data))
 	# compute data for the last row of plots
-	for b in np.repeat([-14, -16, -18], 6):
+	for b in np.repeat([-14, -16, -18], 1):
 		s = sigma * np.random.randn(l) + mu
 		n = sim_GLM(s, f, h, b)
 		data_by_offset.append((sum(n), *fitter_trial(s, n, f, h, b)))
@@ -90,14 +91,25 @@ def do_4():
 			serieslist, y_label = plotcols[col]
 			for series in serieslist:
 				index, color, label = series
-				plt.scatter([x[0] for x in dataset], [x[index] for x in dataset], c=color)
+				plt.scatter([x[0] for x in dataset], [x[index] for x in dataset], c=color, label=label)
 			plt.xscale('log')
+			plt.xlabel(x_label)
+			plt.ylabel(y_label)
+			if len(serieslist) > 1:
+				plt.legend()
+	plt.subplot(3, 3, 2)
+	plt.title('Varying Samples')
+	plt.subplot(3, 3, 5)
+	plt.title('Varying Samples')
+	plt.subplot(3, 3, 8)
+	plt.title('Varying Offset')
+	plt.tight_layout()
 	plt.show()
 
 def fitter_trial(s, n, f, h, b):
 	'''takes stimulus s, spiking history n, stimulus filter f, self interaction filter h, offset b
 	fits GLM to s and n, returning absolute error in b, RMSE of f and h, and MSE of f and h
-	only coefficients with <5 standard error are used in the error calculation for h'''
+	only coefficients with <=10 standard error are used in the error calculation for h'''
 	if len(f) != len(h):
 		raise ValueError("Expected len(f) == len(h)")
 	fit_f, fit_h, fit_b, fit_se_f, fit_se_h, fit_se_b = fit_GLM(s, n, len(f))
@@ -105,7 +117,7 @@ def fitter_trial(s, n, f, h, b):
 	error_h = np.subtract(fit_h, h)
 	# fudge factor, do not accumulate very large errors
 	for i in range(len(h)):
-		if fit_se_h[i] >= 1000:
+		if fit_se_h[i] > 10:
 			fit_se_h[i] = 0
 			error_h[i] = 0
 	return abs(fit_b - b), rms(error_f), rms(error_h), np.mean(fit_se_f), np.mean(fit_se_h)
