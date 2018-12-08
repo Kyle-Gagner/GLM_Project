@@ -1,4 +1,4 @@
-import math, os
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from sim_GLM import *
@@ -123,6 +123,4 @@ plt.title('Varying Offset')
 plt.tight_layout()
 fig2.savefig('section_4_fig2.pdf', bbox_inches='tight')
 
-with open('figures4', 'a') as f:
-	pass
-os.utime('figures4')
+open('figures4', 'w').close()  # For makefile

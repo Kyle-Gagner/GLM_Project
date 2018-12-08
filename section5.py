@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import matplotlib.pyplot as plt
 from sim_GLM import *
@@ -30,7 +29,4 @@ plt.ylim((-10, 5))
 plt.title('Cell 2 Self Interaction Filter')
 plt.tight_layout()
 fig.savefig('section_5_fig1.pdf', bbox_inches='tight')
-
-with open('figures5', 'a') as f:
-	pass
-os.utime('figures5')
+open('figures5', 'w').close  # For makefile
