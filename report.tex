@@ -1,5 +1,6 @@
 \documentclass[letterpaper,titlepage,10pt]{article}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage[letterpaper, portrait, margin=0.5in]{geometry}
 \title{EE416 Final Project:\\Generalized Linear Models for Neural Data}
 \date{Dec 7, 2018}
@@ -9,8 +10,37 @@
 \section{Abstract}
 We did stuff
 \section{Summary of Results}
-This is what happened when we did stuff\\
-\includegraphics[width=\textwidth]{section_4_fig1.pdf}\\
+
+\subsection{Simulating and Fitting Parameters to a GLM}
+
+We used stimulus filter $f(t)=20e^{-t}$, self interaction filter $h(t)=-200e^{-t}$, and offset $b=-15$ as the
+parameters to our GLM simulation. Filters were 15 coefficients long. The input stimulus was:
+
+$$s(t)\sim
+\begin{cases}
+0 & t < 2000\\
+\mathcal{N}(\mu=0.3, \sigma=0.1) & 2000 \leq t < 20000
+\end{cases}$$
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{section_4_fig1.pdf}
+\caption{Simulation of a GLM and parameters fitted to the simulated data}
+\label{fig_simulation}
+\end{figure}
+
+The filter coefficients (True series) and stimulus are ploted in Figure \ref{fig_simulation} along with the spiking
+response of the simulation. Here it can be seen that spiking does not occur when the stimulus is zero because the
+relatively large negative offset dominates. When the stimulus is noisy, spiking occurs. The spiking appears
+qualitatively plausible.
+
+A model was then fit to the simulated data. The coefficients and their standard error (Estimated series) are shown
+overlaid on the ground truth in Figure \ref{fig_simulation}. The fit for the stimulus filter is good. The fit for the
+self interaction filter is extremely poor for the first few coefficients and quickly improves, although it is not as
+good as the fit to the stimulus filter. This can be explained by the fact that the optimization code depends on
+observations of various interarrival times in order to estimate these coefficients. Due to the model's refractory
+period, there are no or few observations for short interarrivals. By contrast, any spike in the response is a useful
+observation for optimizing any of the stimulus filter coefficients, which is why their fits are relatively good.
+
 \includegraphics[width=\textwidth]{section_4_fig2.pdf}\\
 \includegraphics[width=\textwidth]{section_5_fig1.pdf}\\
 \section{Analysis}
