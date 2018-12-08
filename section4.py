@@ -114,6 +114,8 @@ for row in range(3):
 		plt.ylabel(y_label)
 		if len(serieslist) > 1:
 			plt.legend()
+		ticks, labels = plt.yticks()
+		plt.ylim((0, max(ticks)))
 plt.subplot(3, 3, 2)
 plt.title('Varying Samples')
 plt.subplot(3, 3, 5)

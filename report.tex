@@ -1,9 +1,10 @@
 \documentclass[letterpaper,titlepage,10pt]{article}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{indentfirst}
 \usepackage[letterpaper, portrait, margin=0.5in]{geometry}
 \title{EE416 Final Project:\\Generalized Linear Models for Neural Data}
-\date{Dec 7, 2018}
+\date{Dec 8, 2018}
 \author{Kyle Gagner and Fred Davis}
 \begin{document}
 \maketitle
@@ -11,7 +12,7 @@
 We did stuff
 \section{Summary of Results}
 
-\subsection{Simulating and Fitting Parameters to a GLM}
+\subsection{Simulating a GLM}
 
 We used stimulus filter $f(t)=20e^{-t}$, self interaction filter $h(t)=-200e^{-t}$, and offset $b=-15$ as the
 parameters to our GLM simulation. Filters were 15 coefficients long. The input stimulus was:
@@ -25,23 +26,50 @@ $$s(t)\sim
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{section_4_fig1.pdf}
 \caption{Simulation of a GLM and parameters fitted to the simulated data}
-\label{fig_simulation}
+\label{fig41}
 \end{figure}
 
-The filter coefficients (True series) and stimulus are ploted in Figure \ref{fig_simulation} along with the spiking
+The filter coefficients (True series) and stimulus are ploted in Figure \ref{fig41} along with the spiking
 response of the simulation. Here it can be seen that spiking does not occur when the stimulus is zero because the
 relatively large negative offset dominates. When the stimulus is noisy, spiking occurs. The spiking appears
 qualitatively plausible.
 
+\subsection{Fitting Parameters to a GLM}
+
 A model was then fit to the simulated data. The coefficients and their standard error (Estimated series) are shown
-overlaid on the ground truth in Figure \ref{fig_simulation}. The fit for the stimulus filter is good. The fit for the
+overlaid on the ground truth in Figure \ref{fig41}. The fit for the stimulus filter is good. The fit for the
 self interaction filter is extremely poor for the first few coefficients and quickly improves, although it is not as
 good as the fit to the stimulus filter. This can be explained by the fact that the optimization code depends on
 observations of various interarrival times in order to estimate these coefficients. Due to the model's refractory
 period, there are no or few observations for short interarrivals. By contrast, any spike in the response is a useful
-observation for optimizing any of the stimulus filter coefficients, which is why their fits are relatively good.
+observation for optimizing any of the stimulus filter coefficients, which is why their fits are more consistently good.
 
-\includegraphics[width=\textwidth]{section_4_fig2.pdf}\\
+The fitter works properly but where it is not given enough information to function, the results are not useful. Given
+this limitation, it makes sense to simply exclude coefficients with excessive standard error from error estimates. The
+method used for this is discussed in more detail in the Analysis section.
+
+\subsection{Understanding GLM Performance}
+
+The same simulation and fitting methods were repeated with varying parameters to explore performance of the fitter.
+The results represent two sets of data. One where the number of samples in the stimulus signal were varied and a
+second where the offset $b$ was varied. Absolute error is shown for the offset parameter, and both RMSE (root mean
+squared error) and MSE (mean standard error) error metrics.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{section_4_fig2.pdf}
+\caption{Simulation of a GLM and parameters fitted to the simulated data}
+\label{fig42}
+\end{figure}
+
+The datasets are plotted in Figure \ref{fig42}. In general, there is no observable correlation between offset parameter
+error and the independent variable in either dataset. There is a clear downward trend in stimulus filter MSE in both
+datasets, but RMSE for the stimulus filter only has a clear downward trend as the number of samples increases,
+suggesting that the total number of observations is more significant than the number of spikes for fitting the stimulus
+filter. By contrast, slight downward trends in RMSE of the self interaction filter are observable in both datasets,
+suggesting that the number of spikes observed is more significant than total number of samples in fitting the self
+interaction filters. Another interesting feature of the plots is that response filter fits tend to be better,
+suggesting that the self interaction is harder to fit.
+
 \includegraphics[width=\textwidth]{section_5_fig1.pdf}\\
 \section{Analysis}
 How we did the stuff
