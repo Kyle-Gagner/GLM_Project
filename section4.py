@@ -36,7 +36,7 @@ s = np.concatenate([np.zeros(2000), sigma * np.random.randn(18000) + mu])
 # simulate
 n = sim_GLM(s, f, h, b)
 # plot
-fig1 = plt.figure(figsize=(7.5, 6))
+fig1 = plt.figure(figsize=(15, 12))
 plt.subplot(4, 1, 1)
 plt.plot(f, label='True', linewidth=1)
 plt.title('Stimulus Filter')
@@ -80,14 +80,14 @@ rmse_h = 3
 mse_f = 4
 mse_h = 5
 # compute data for the first two rows of plots
-for l in np.repeat([int(x) for x in [1e3, 3e3, 1e4, 3e4]], 1):
+for l in np.repeat([int(x) for x in [1e3, 3e3, 1e4, 3e4]], 6):
 	s = sigma * np.random.randn(l) + mu
 	n = sim_GLM(s, f, h, b)
 	data = fitter_trial(s, n, f, h, b)
 	data_by_length.append((l, *data))
 	data_by_spikes.append((sum(n), *data))
 # compute data for the last row of plots
-for b in np.repeat([-14, -16, -18], 1):
+for b in np.repeat([-14, -16, -18], 6):
 	s = sigma * np.random.randn(l) + mu
 	n = sim_GLM(s, f, h, b)
 	data_by_offset.append((sum(n), *fitter_trial(s, n, f, h, b)))
@@ -100,7 +100,7 @@ plotrows = [
 plotcols = [([(abs_b, 'blue', 'offset')], 'Offset Error'),
 	([(rmse_f, 'blue', 'stimulus filters'), (rmse_h, 'red', 'response filters')], 'RMSE'),
 	([(mse_f, 'blue', 'stimulus filters'), (mse_h, 'red', 'response filters')], 'MSE')]
-fig2=plt.figure(figsize=(7.5, 10))
+fig2=plt.figure(figsize=(15, 20))
 for row in range(3):
 	dataset, x_label = plotrows[row]
 	for col in range(3):
