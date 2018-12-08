@@ -15,6 +15,7 @@ sigma_2 = spike_ints.var()
 corr = np.corrcoef(spike_ints[:-1], spike_ints[1:])[1, 0]
 
 # Plot histogram
+plt.figure(figsize=(15,12))
 host = host_subplot(111, axes_class=AA.Axes)
 hist_plt = plt.hist(spike_ints, bins=20, label='Histogram')
 host.set_title('ISI histogram and Estimated PDF')
@@ -33,7 +34,7 @@ model_plt = par.plot(x, model.pdf(x), label='PDF')
 host.legend()
 par.set_ylabel('Probability Density')
 par.axis['right'].toggle(all=True)
-plt.subplots_adjust(bottom=0.2)
+plt.subplots_adjust(bottom=0.1)
 plt.figtext(
 	x=0,
 	y=0,
