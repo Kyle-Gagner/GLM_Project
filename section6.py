@@ -35,7 +35,7 @@ host.legend()
 par.set_ylabel('Probability Density')
 par.axis['right'].toggle(all=True)
 plt.tight_layout()
-plt.subplots_adjust(bottom=0.1)
+plt.subplots_adjust(bottom=0.1, right=0.9)
 plt.figtext(
 	x=0,
 	y=0,
