@@ -28,5 +28,18 @@ plt.errorbar(range(d), h2, yerr=se_h2, linewidth=1)
 plt.ylim((-10, 5))
 plt.title('Cell 2 Self Interaction Filter')
 plt.tight_layout()
+plt.subplots_adjust(bottom=0.1)
+plt.figtext(
+        x=0,
+        y=0,
+        s='\n'.join([
+                'Cell 1 Offset Parameter: {:.3}',
+                'Cell 1 Std. Err. Offset: {:.3}',
+                'Cell 2 Offset Parameter: {:.3}',
+                'Cell 2 Std. Err. Offset: {:.3}'
+        ]).format(
+                b1, se_b1, b2, se_b2
+        )
+)
 fig.savefig('section_5_fig1.pdf', bbox_inches='tight')
 open('figures5', 'w').close  # For makefile
