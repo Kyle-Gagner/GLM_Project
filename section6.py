@@ -34,6 +34,7 @@ model_plt = par.plot(x, model.pdf(x), label='PDF')
 host.legend()
 par.set_ylabel('Probability Density')
 par.axis['right'].toggle(all=True)
+plt.tight_layout()
 plt.subplots_adjust(bottom=0.1)
 plt.figtext(
 	x=0,
