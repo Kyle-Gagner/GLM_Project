@@ -100,7 +100,7 @@ plotrows = [
 plotcols = [([(abs_b, 'blue', 'offset')], 'Offset Error'),
 	([(rmse_f, 'blue', 'stimulus filters'), (rmse_h, 'red', 'response filters')], 'RMSE'),
 	([(mse_f, 'blue', 'stimulus filters'), (mse_h, 'red', 'response filters')], 'MSE')]
-fig2=plt.figure(figsize=(15, 20))
+fig2=plt.figure(figsize=(15, 19))
 for row in range(3):
 	dataset, x_label = plotrows[row]
 	for col in range(3):
