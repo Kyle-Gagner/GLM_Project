@@ -25,7 +25,7 @@ $$s(t)\sim
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{section_4_fig1.pdf}
-\caption{Simulation of a GLM and parameters fitted to the simulated data}
+\caption{Simulation of a GLM}
 \label{fig41}
 \end{figure}
 
@@ -70,9 +70,52 @@ suggesting that the number of spikes observed is more significant than total num
 interaction filters. Another interesting feature of the plots is that response filter fits tend to be better,
 suggesting that the self interaction is harder to fit.
 
-\includegraphics[width=\textwidth]{section_5_fig1.pdf}\\
+\subsection{GLM Fits of Neural Data}
+
+A GLM model was fitted to Allen Institute data recorded from live neurons. The models simplify the dynamics of the
+neural systems enough to draw useful conclusions from the data, while providing enough degrees of freedom to be useful.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{section_5_fig1.pdf}
+\caption{Simulation of a GLM and parameters fitted to the simulated data}
+\label{fig51}
+\end{figure}
+
+The plots in Figure \ref{fig51} show the stimulus filter, self interaction filter, and offset coefficients and their
+standard errors for the Allen Institute datasets. Some features are expected from the results already analyzed in the
+previous section. The self interaction filters begin at relatively large negative values, indicating a refractory
+period which is expected. The fits for the first few coefficients of the self interaction filters also have large
+error, which is also expected when the refractory period prevents the fitter from observing data with very small
+interarrival times between spikes. The stimulus filters are also interesting to observe, but say relatively little
+about the dynamics of the systems compared to the self interaction filters. Behavior is largely dependent on the
+stimulus through these stimulus filters.
+
 \section{Analysis}
-How we did the stuff
+
+The code for GLM simulation, GLM fitting, and data analysis and plotting was written in Python making extensive use
+of packages as mentioned in references. Nontrivial parts of this code are documented in this section.
+
+\subsection{Simulation of a GLM}
+
+The simulation function takes a stimulus $s$, stimulus filter $f$, self interaction filter $h$, and offset $b$. Note
+that the stimulus and self interaction filters are a series of coefficients each assumed to begin at time $t=1$, not
+$t=0$. Time $t$ is taken to be discrete. First an intermediate result $x[t]$ is computed, which is then used to
+calculate $n[t]$, the spiking history, using a Poisson distribution $\mathcal{P}(\lambda)$.
+
+$$x[t]=s[t]*f[t]$$
+$$n[t]\sim
+\begin{cases}
+0 & t < 0\\
+\mathcal{P}(exp(x[t]+n[\tau-t]*h[\tau]+b)) & t \geq 0
+\end{cases}$$
+
+In practical terms, $n[t]$ is zero padded to the left to sufficient negative time to make calculating the expression
+easy without running off the beginning of the array when convolving with $h[t]$. Each value of $n[t]$ from $t=0$ on
+can be calculated only after the previous value is known, due to the convolution. The simulation routine returns
+$n[t] \forall 0 \leq t < len(s[t])$.
+
+\subsection{Fitting Parameters to a GLM}
+
 \section{References}
 What other stuff we used to do the stuff
 \section{Appendices}
