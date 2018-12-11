@@ -3,13 +3,17 @@
 \usepackage{amsmath}
 \usepackage{indentfirst}
 \usepackage[letterpaper, portrait, margin=0.5in]{geometry}
+\usepackage{hyperref}
 \title{EE416 Final Project:\\Generalized Linear Models for Neural Data}
 \date{Dec 8, 2018}
 \author{Kyle Gagner and Fred Davis}
 \begin{document}
 \maketitle
-\section{Abstract}
+
+\begin{abstract}
 We did stuff
+\end{abstract}
+
 \section{Summary of Results}
 
 \subsection{Simulating a GLM}
@@ -90,6 +94,23 @@ interarrival times between spikes. The stimulus filters are also interesting to 
 about the dynamics of the systems compared to the self interaction filters. Behavior is largely dependent on the
 stimulus through these stimulus filters.
 
+\subsection{Inter-Spike Interval Analysis}
+
+The inter-spike intervals were calculated by taking the difference between adjacent spike times provided in
+ISIsimulated.txt. The provided spike times had been generated via a renewal process. The correlation between
+successive inter-spike intervals is 0.0244.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{section_6_fig1.pdf}
+\caption{The inter-spike intervals from ISIsimulated.txt}
+\label{fig61}
+\end{figure}
+
+A histogram of the distribution of the inter-spike intervals is shown in Figure \ref{fig61}. The mean and variance of
+the distribution are estimated to be 2.52 and 2.55 respectively. Overlayed is the probability density function of a
+gamma distribution to model the distribution distribution of the inter-spike intervals. It has a goodness of fit of
+0.938.
+
 \section{Analysis}
 
 The code for GLM simulation, GLM fitting, and data analysis and plotting was written in Python making extensive use
@@ -116,8 +137,21 @@ $n[t] \forall 0 \leq t < len(s[t])$.
 
 \subsection{Fitting Parameters to a GLM}
 
+\subsection{Understanding GLM Performance}
+
+\subsection{GLM Fits of Neural Data}
+
+\subsection{Inter Spike Interval Analysis}
+
 \section{References}
-What other stuff we used to do the stuff
+
+\begin{itemize}
+\item NumPy: \url{https://www.numpy.org/}
+\item Matplotlib: \url{https://matplotlib.org/}
+\item StatsModels: \url{https://www.statsmodels.org/}
+\item SciPy: \url{https://www.scipy.org/}
+\end{itemize}
+
 \section{Appendices}
 Mention the code files that did the stuff
 \end{document}

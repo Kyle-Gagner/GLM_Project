@@ -18,7 +18,7 @@ corr = np.corrcoef(spike_ints[:-1], spike_ints[1:])[1, 0]
 plt.figure(figsize=(15,12))
 host = host_subplot(111, axes_class=AA.Axes)
 hist_plt = plt.hist(spike_ints, bins=20, label='Histogram')
-host.set_title('ISI histogram and Estimated PDF')
+host.set_title('ISI Histogram and Estimated PDF')
 host.set_xlabel('Inter Spike Interval')
 host.set_ylabel('Number of Occurances')
 
@@ -43,7 +43,7 @@ plt.figtext(
 		'Mean: {:.3}',
 		'Variance: {:.3}',
 		'Correlation Between Successive ISI: {:.3}',
-		'Goodness of Fit: {:.2}'
+		'Goodness of Fit: {:.3}'
 	]).format(
 		mu, sigma_2, corr, gof
 	)
