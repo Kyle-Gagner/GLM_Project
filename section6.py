@@ -50,4 +50,5 @@ plt.figtext(
 )
 
 plt.savefig('section_6_fig1.pdf', bbox_inches='tight')
+
 open('figures6', 'w').close()  # For makefile

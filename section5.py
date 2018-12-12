@@ -3,13 +3,19 @@ import matplotlib.pyplot as plt
 from sim_GLM import *
 from fit_GLM import *
 
-d = 20
+d = 20  # Filter length
+
+# Load data
 n1 = np.genfromtxt('binned_spikes_cell_1.txt', delimiter=',')
 n2 = np.genfromtxt('binned_spikes_cell_2.txt', delimiter=',')
 s1 = np.genfromtxt('binned_stim_cell_1.txt', delimiter=',')
 s2 = np.genfromtxt('binned_stim_cell_2.txt', delimiter=',')
+
+# Fit data to GLM
 f1, h1, b1, se_f1, se_h1, se_b1 = fit_GLM(s1, n1, d)
 f2, h2, b2, se_f2, se_h2, se_b2 = fit_GLM(s2, n2, d)
+
+# Plot fitted data
 fig = plt.figure(figsize=(15, 12))
 plt.subplot(4, 1, 1)
 plt.errorbar(range(d), f1, yerr=se_f1, linewidth=1)
@@ -42,4 +48,5 @@ plt.figtext(
         )
 )
 fig.savefig('section_5_fig1.pdf', bbox_inches='tight')
+
 open('figures5', 'w').close  # For makefile
