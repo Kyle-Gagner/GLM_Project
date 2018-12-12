@@ -13,12 +13,12 @@
 
 \begin{abstract}
 
-We developed methods to simulate neural spiking provided the coefficients for a stimulus filter and a self
-interaction filter and an offset and to estimate the coefficients for the stimulus and self interaction
-filters and the offset provided the stimulus and spiking data. Then, we tested the resilience of the fitter
-with various parameters, and found it to have generally good resilience. Next, we used the fitter to estimate
-the stimulus and self interaction filters of real neurons (as opposed to simulated ones). Lastly, we analyzed
-the inter-spike intervals of a neuron simulatedwith a renewal process. We were able to roughtly fit the
+We developed methods to simulate neural spiking using a generalized linear model (GLM). We also compared fitted model
+parameters to ground truth - parameters which were used in the simulation. Then, we tested the resilience of the fitter
+against various parameters, and found it to have generally good error performance, with the exception of parameters
+which the fitter was not given enough data to estimate. Next, we used the fitter to estimate the model parameters of
+real neurons (as opposed to simulated ones) and used the model to explain the behavior of the neuron. Lastly, we
+analyzed the inter-spike intervals of a neuron simulated using a renewal process. We were able to roughly fit the
 distribution of inter-spike intervals to a gamma distribution.
 
 \end{abstract}
