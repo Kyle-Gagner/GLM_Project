@@ -27,7 +27,7 @@ distribution of inter-spike intervals to a gamma distribution.
 
 \subsection{Simulating a GLM}
 
-We used stimulus filter $f(t)=20e^{-t}$, self interaction filter $h(t)=-200e^{-t}$, and offset $b=-15$ as the
+We used stimulus filter $f[t]=20e^{-t}$, self interaction filter $h[t]=-200e^{-t}$, and offset $b=-15$ as the
 parameters to our GLM simulation. Filters were 15 coefficients long. The input stimulus was:
 
 $$s(t)\sim
@@ -178,7 +178,18 @@ Another vector with the same layout contains estimates of the standard errors of
 
 \subsection{Understanding GLM Performance}
 
+To plot GLM performance, the existing methods for simulating and fitting neural data were used, using stimulus with
+the same normal distribution and the same filters. Two datasets were generated, one by varying the length of the
+stimulus, and a second by varying the offset parameter. Error metrics were plotted against stimulus length and spike
+count in the first dataset. Error metrics were plotted against spike count in the second dataset. Three error metrics
+were used, a simple absolute error for the offset parameter, a modified root mean squared error (RMSE) for the filters,
+and a modified mean standard error (MSE) for the filters. The modification in each case was to discard coefficients
+with a standard error estimate greater than 100.
+
 \subsection{GLM Fits of Neural Data}
+
+In previous sections, the GLM fitting was performed against simulated data. In this section, models were fit to real
+datasets. No analysis tools besides those developed in the previous section were required.
 
 \subsection{Inter-Spike Interval Analysis}
 

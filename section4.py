@@ -7,7 +7,7 @@ from fit_GLM import *
 def fitter_trial(s, n, f, h, b):
 	'''takes stimulus s, spiking history n, stimulus filter f, self interaction filter h, offset b
 	fits GLM to s and n, returning absolute error in b, RMSE of f and h, and MSE of f and h
-	only coefficients with <=10 standard error are used in the error calculation for h'''
+	only coefficients with <=100 standard error are used in the error calculation for h'''
 	if len(f) != len(h):
 		raise ValueError("Expected len(f) == len(h)")
 	fit_f, fit_h, fit_b, fit_se_f, fit_se_h, fit_se_b = fit_GLM(s, n, len(f))
@@ -15,7 +15,7 @@ def fitter_trial(s, n, f, h, b):
 	error_h = np.subtract(fit_h, h)
 	# fudge factor, do not accumulate very large errors
 	for i in range(len(h)):
-		if fit_se_h[i] > 10:
+		if fit_se_h[i] > 100:
 			fit_se_h[i] = 0
 			error_h[i] = 0
 	return abs(fit_b - b), rms(error_f), rms(error_h), np.mean(fit_se_f), np.mean(fit_se_h)
