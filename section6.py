@@ -17,7 +17,7 @@ corr = np.corrcoef(spike_ints[:-1], spike_ints[1:])[1, 0]
 # Plot histogram
 plt.figure(figsize=(15, 12))
 host = host_subplot(111, axes_class=AA.Axes)
-hist_plt = plt.hist(spike_ints, bins=20, label='Histogram')
+hist_plt = plt.hist(spike_ints, bins=24, range=(0,12), label='Histogram')
 host.set_title('ISI Histogram and Estimated PDF')
 host.set_xlabel('Inter-Spike Interval')
 host.set_ylabel('Number of Occurrences')
