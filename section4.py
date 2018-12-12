@@ -101,6 +101,7 @@ plotcols = [([(abs_b, 'blue', 'offset')], 'Offset Error'),
 	([(rmse_f, 'blue', 'stimulus filters'), (rmse_h, 'red', 'response filters')], 'RMSE'),
 	([(mse_f, 'blue', 'stimulus filters'), (mse_h, 'red', 'response filters')], 'MSE')]
 fig2=plt.figure(figsize=(15, 19))
+# generate the rows and columns of plots
 for row in range(3):
 	dataset, x_label = plotrows[row]
 	for col in range(3):
@@ -116,6 +117,7 @@ for row in range(3):
 			plt.legend()
 		ticks, labels = plt.yticks()
 		plt.ylim((0, max(ticks)))
+# indicate how the data series were generated using plot titles
 plt.subplot(3, 3, 2)
 plt.title('Varying Samples')
 plt.subplot(3, 3, 5)
@@ -123,6 +125,7 @@ plt.title('Varying Samples')
 plt.subplot(3, 3, 8)
 plt.title('Varying Offset')
 plt.tight_layout()
+# save figure
 fig2.savefig('section_4_fig2.pdf', bbox_inches='tight')
 
 open('figures4', 'w').close()  # For makefile
