@@ -131,6 +131,8 @@ gamma distribution to model the distribution distribution of the inter-spike int
 \label{fig62}
 \end{figure}
 
+The histogram for the inter-spike intervals of the second neuron is shown in Figure \ref{fig62}. It appears to be an impulse at 0 with some slight noise near 1 and -1.
+
 \section{Analysis}
 
 The code for GLM simulation, GLM fitting, and data analysis and plotting was written in Python making extensive use
@@ -210,7 +212,7 @@ The correlation was nearly zero, which makes sense because the spike times were 
 so the intervals should be independent of each other. Then, the histogram was plotted using Matplotlib's \textit{hist}
 function. Looking at the histogram, it appeared to roughly follow a gamma distribution. SciPy's \textit{stats.gamma.fit function}
 was used to fit the histogram to a gamma distribution, which was then overlayed on the histogram. Lastly, the
-goodness of fit was measured using a Kolmogorov-Smirnov test.
+goodness of fit was measured using a Kolmogorov-Smirnov test. The second neuron ISI histogram was generated very similarly to the other one.
 
 \section{References}
 

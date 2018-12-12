@@ -54,7 +54,6 @@ plt.savefig('section_6_fig1.pdf', bbox_inches='tight')
 # Analyze ISI of neuron 2
 n2_spike_times = np.genfromtxt('binned_spikes_cell_2.txt', delimiter=',')
 n2_isi = np.diff(n2_spike_times)
-
 # Plot histogram of neuron 2's ISI
 plt.figure(figsize=(15, 12))
 plt.hist(n2_isi, bins=20)
