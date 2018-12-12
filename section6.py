@@ -52,11 +52,21 @@ plt.figtext(
 plt.savefig('section_6_fig1.pdf', bbox_inches='tight')
 
 # Analyze ISI of neuron 2
-n2_spike_times = np.genfromtxt('binned_spikes_cell_2.txt', delimiter=',')
-n2_isi = np.diff(n2_spike_times)
+n2_spikes = np.genfromtxt('binned_spikes_cell_2.txt', delimiter=',')
+n2_isi = []
+count = 0
+for spikes in n2_spikes:
+	if spikes == 0:
+		count += 1
+	elif count < 300:
+		n2_isi.append(count)
+		count = 0
+	else:
+		count = 0  # Don't include unusually large ISI
+
 # Plot histogram of neuron 2's ISI
 plt.figure(figsize=(15, 12))
-plt.hist(n2_isi, bins=20)
+plt.hist(n2_isi, bins=200)
 plt.title('Second Neuron ISI Histogram')
 plt.xlabel('Inter-Spike Interval')
 plt.ylabel('Number of Occurances')
