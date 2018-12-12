@@ -56,7 +56,7 @@ qualitatively plausible.
 
 A model was then fit to the simulated data. The coefficients and their standard error (Estimated series) are shown
 overlaid on the ground truth in Figure \ref{fig41}. The fit for the stimulus filter is good. The fit for the
-self interaction filter is extremely poor for the first few coefficients and quickly improved for subsequent
+self interaction filter is extremely poor for the first few coefficients and quickly improves for subsequent
 coefficients. This can be explained by the fact that the optimization code depends on
 observations of various interarrival times in order to estimate these coefficients. Due to the model's refractory
 period, there are no or few observations for short interarrivals. By contrast, any spike in the response is a useful
@@ -131,7 +131,12 @@ gamma distribution to model the distribution distribution of the inter-spike int
 \label{fig62}
 \end{figure}
 
-The histogram for the inter-spike intervals of the second neuron is shown in Figure \ref{fig62}. It appears to also approximately follow a gamma distribution.
+The histogram for the inter-spike intervals of the second neuron is shown in Figure \ref{fig62}. The histogram has
+a similar gamma distribution like shape. Consistent with the large negative coefficients leading cell 2's self
+interaction filter and the understanding that neurons have a refractory period, there are no single sample
+interarrival times and very few two sample interarrival times. After this point, the suppression of spikes caused
+by the self interaction drops significantly, and there are many three sample interarrivals, with the peak bin of the
+histogram at four samples.
 
 \section{Analysis}
 
@@ -149,7 +154,7 @@ $$x[t]=s[t]*f[t]$$
 $$n[t]\sim
 \begin{cases}
 0 & t < 0\\
-\mathcal{P}(exp(x[t]+n[\tau-t]*h[\tau]+b)) & t \geq 0
+min(\mathcal{P}(exp(x[t]+n[\tau-t]*h[\tau]+b)), 1) & t \geq 0
 \end{cases}$$
 
 In practical terms, $n[t]$ is zero padded to the left to sufficient negative time to make calculating the expression
