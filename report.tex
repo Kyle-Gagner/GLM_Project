@@ -137,6 +137,36 @@ $n[t] \forall 0 \leq t < len(s[t])$.
 
 \subsection{Fitting Parameters to a GLM}
 
+Fitting GLM parameters was accomplished using the \textit{statsmodels.api.GLM} function in
+Python using \textit{statsmodels.api.families.Poisson()} for the family parameter. Two
+matrices, one of exogenous variables and one of endogenous variables are passed to the fitting routine. Using the
+stimulus $s[t]$ and spike response $n[t]$ of length $l$, and filter length $d$, the matrices are constructed as
+follows:
+
+$$Exog=
+\begin{bmatrix}
+n[d-1] & n[d-2] & \hdots & n[0] & s[d-1] & s[d-2] & \hdots & s[0] \\
+n[d] & n[d-1] & \hdots & n[1] & s[d] & s[d-1] & \hdots & s[1] \\
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+n[l-2] & n[l-3] & \hdots & n[l-d-1] & s[l-2] & s[l-3] & \hdots & s[l-d-1]
+\end{bmatrix}$$
+
+$$Endog=
+\begin{bmatrix}
+n[d] \\
+n[d+1] \\
+\vdots \\
+n[l-1]
+\end{bmatrix}$$
+
+The result returned contains the parameters of interest packed into a vector:
+
+$$\begin{bmatrix}
+h[0] & h[1] & \hdots & h[d-1] & f[0] & f[1] & \hdots & f[d-1] & b
+\end{bmatrix}$$
+
+Another vector with the same layout contains estimates of the standard errors of each of these parameters.
+
 \subsection{Understanding GLM Performance}
 
 \subsection{GLM Fits of Neural Data}
