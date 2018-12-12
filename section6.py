@@ -58,7 +58,7 @@ count = 0
 for spikes in n2_spikes:
 	if spikes == 0:
 		count += 1
-	elif count < 300:
+	elif count < 100:
 		n2_isi.append(count)
 		count = 0
 	else:
@@ -66,7 +66,7 @@ for spikes in n2_spikes:
 
 # Plot histogram of neuron 2's ISI
 plt.figure(figsize=(15, 12))
-plt.hist(n2_isi, bins=200)
+plt.hist(n2_isi, bins=100)
 plt.title('Second Neuron ISI Histogram')
 plt.xlabel('Inter-Spike Interval')
 plt.ylabel('Number of Occurrences')
