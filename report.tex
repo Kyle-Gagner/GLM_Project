@@ -4,6 +4,7 @@
 \usepackage{indentfirst}
 \usepackage[letterpaper, portrait, margin=0.5in]{geometry}
 \usepackage{hyperref}
+\usepackage{float}
 \title{EE416 Final Project:\\Generalized Linear Models for Neural Data}
 \date{\today}
 \author{Kyle Gagner and Fred Davis}
@@ -35,7 +36,7 @@ $$s(t)\sim
 \mathcal{N}(\mu=0.3, \sigma=0.1) & 2000 \leq t < 20000
 \end{cases}$$
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{section_4_fig1.pdf}
 \caption{Simulation of a GLM}
 \label{fig41}
@@ -67,7 +68,7 @@ The results represent two sets of data. One where the number of samples in the s
 second where the offset $b$ was varied. Absolute error is shown for the offset parameter, and both RMSE (root mean
 squared error) and MSE (mean standard error) error metrics.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{section_4_fig2.pdf}
 \caption{Simulation of a GLM and parameters fitted to the simulated data}
 \label{fig42}
@@ -87,7 +88,7 @@ suggesting that the self interaction is harder to fit.
 A GLM model was fitted to Allen Institute data recorded from live neurons. The models simplify the dynamics of the
 neural systems enough to draw useful conclusions from the data, while providing enough degrees of freedom to be useful.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{section_5_fig1.pdf}
 \caption{Simulation of a GLM and parameters fitted to the simulated data}
 \label{fig51}
@@ -108,7 +109,7 @@ The inter-spike intervals were calculated by taking the difference between adjac
 ISIsimulated.txt. The provided spike times had been generated via a renewal process. The correlation between
 successive inter-spike intervals is 0.0244.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{section_6_fig1.pdf}
 \caption{The inter-spike intervals from ISIsimulated.txt}
 \label{fig61}
