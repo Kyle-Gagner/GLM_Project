@@ -5,13 +5,21 @@
 \usepackage[letterpaper, portrait, margin=0.5in]{geometry}
 \usepackage{hyperref}
 \title{EE416 Final Project:\\Generalized Linear Models for Neural Data}
-\date{Dec 8, 2018}
+\date{\today}
 \author{Kyle Gagner and Fred Davis}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We did stuff
+
+We developed methods to simulate neural spiking provided the coefficients for a stimulus filter and a self
+interaction filter and an offset and to estimate the coefficients for the stimulus and self interaction
+filters and the offset provided the stimulus and spiking data. Then, we tested the resilience of the fitter
+with various parameters, and found it to have generally good resilience. Next, we used the fitter to estimate
+the stimulus and self interaction filters of real neurons (as opposed to simulated ones). Lastly, we analyzed
+the inter-spike intervals of a neuron simulatedwith a renewal process. We were able to roughtly fit the
+distribution of inter-spike intervals to a gamma distribution.
+
 \end{abstract}
 
 \section{Summary of Results}
