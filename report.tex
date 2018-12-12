@@ -125,6 +125,12 @@ the distribution are estimated to be 2.52 and 2.55 respectively. Overlayed is th
 gamma distribution to model the distribution distribution of the inter-spike intervals. It has a goodness of fit of
 0.938.
 
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{section_6_fig2.pdf}
+\caption{The inter-spike intervals for the second neuron}
+\label{fig62}
+\end{figure}
+
 \section{Analysis}
 
 The code for GLM simulation, GLM fitting, and data analysis and plotting was written in Python making extensive use
@@ -201,7 +207,7 @@ datasets. No analysis tools besides those developed in the previous section were
 The inter-spike intervals were calculated by taking the difference between the spike times that were loaded from
 ISIsimulated.txt. Then, the correlation between successive intervals was taken with NumPy's \textit{corrcoef} function.
 The correlation was nearly zero, which makes sense because the spike times were generated using a renewal process,
-so the intervals should be independent of each other. Then, the histogram was plotted using Matplotlib's \textit{histogram}
+so the intervals should be independent of each other. Then, the histogram was plotted using Matplotlib's \textit{hist}
 function. Looking at the histogram, it appeared to roughly follow a gamma distribution. SciPy's \textit{stats.gamma.fit function}
 was used to fit the histogram to a gamma distribution, which was then overlayed on the histogram. Lastly, the
 goodness of fit was measured using a Kolmogorov-Smirnov test.

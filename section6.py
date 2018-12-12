@@ -15,11 +15,11 @@ sigma_2 = spike_ints.var()
 corr = np.corrcoef(spike_ints[:-1], spike_ints[1:])[1, 0]
 
 # Plot histogram
-plt.figure(figsize=(15,12))
+plt.figure(figsize=(15, 12))
 host = host_subplot(111, axes_class=AA.Axes)
 hist_plt = plt.hist(spike_ints, bins=20, label='Histogram')
 host.set_title('ISI Histogram and Estimated PDF')
-host.set_xlabel('Inter Spike Interval')
+host.set_xlabel('Inter-Spike Interval')
 host.set_ylabel('Number of Occurances')
 
 # Generate gamma model for ISI and measure goodness of fit
@@ -50,5 +50,17 @@ plt.figtext(
 )
 
 plt.savefig('section_6_fig1.pdf', bbox_inches='tight')
+
+# Analyze ISI of neuron 2
+n2_spike_times = np.genfromtxt('binned_spikes_cell_2.txt', delimiter=',')
+n2_isi = np.diff(n2_spike_times)
+
+# Plot histogram of neuron 2's ISI
+plt.figure(figsize=(15, 12))
+plt.hist(n2_isi, bins=20)
+plt.title('Second Neuron ISI Histogram')
+plt.xlabel('Inter-Spike Interval')
+plt.ylabel('Number of Occurances')
+plt.savefig('section_6_fig2.pdf', bbox_inches='tight')
 
 open('figures6', 'w').close()  # For makefile
