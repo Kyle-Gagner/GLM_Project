@@ -11,5 +11,9 @@ figures5: section5.py sim_GLM.py fit_GLM.py
 figures6: section6.py
 	python3 section6.py
 
+DavisGagnerFinalProject.zip: report.pdf sim_GLM.py fit_GLM.py section4.py section5.py section6.py
+	zip DavisGagnerFinalProject.zip report.pdf sim_GLM.py fit_GLM.py section4.py section5.py section6.py \
+	binned_spikes_cell_1.txt binned_spikes_cell_2.txt binned_stim_cell_1.txt binned_stim_cell_2.txt ISIsimulated.txt
+
 clean:
 	rm -f report.aux report.out report.log figures? *.pdf
