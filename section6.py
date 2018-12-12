@@ -20,7 +20,7 @@ host = host_subplot(111, axes_class=AA.Axes)
 hist_plt = plt.hist(spike_ints, bins=20, label='Histogram')
 host.set_title('ISI Histogram and Estimated PDF')
 host.set_xlabel('Inter-Spike Interval')
-host.set_ylabel('Number of Occurances')
+host.set_ylabel('Number of Occurrences')
 
 # Generate gamma model for ISI and measure goodness of fit
 a, _, _ = gamma.fit(spike_ints, floc=0, fscale=1)
@@ -69,7 +69,7 @@ plt.figure(figsize=(15, 12))
 plt.hist(n2_isi, bins=200)
 plt.title('Second Neuron ISI Histogram')
 plt.xlabel('Inter-Spike Interval')
-plt.ylabel('Number of Occurances')
+plt.ylabel('Number of Occurrences')
 plt.savefig('section_6_fig2.pdf', bbox_inches='tight')
 
 open('figures6', 'w').close()  # For makefile
