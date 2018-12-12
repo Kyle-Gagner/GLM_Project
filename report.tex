@@ -141,7 +141,15 @@ $n[t] \forall 0 \leq t < len(s[t])$.
 
 \subsection{GLM Fits of Neural Data}
 
-\subsection{Inter Spike Interval Analysis}
+\subsection{Inter-Spike Interval Analysis}
+
+The inter-spike intervals were calculated by taking the difference between the spike times that were loaded from
+ISIsimulated.txt. Then, the correlation between successive intervals was taken with NumPy's corrcoef function.
+The correlation was nearly zero, which makes sense because the spike times were generated using a renewal process,
+so the intervals should be independent of each other. Then, the histogram was plotted using Matplotlib's histogram
+function. Looking at the histogram, it appeared to roughly follow a gamma distribution. SciPy's gamma.fit function
+was used to fit the histogram to a gamma distribution, which was then overlayed on the histogram. Lastly, the
+goodness of fit was measured using a Kolmogorov-Smirnov test.
 
 \section{References}
 
