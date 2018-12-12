@@ -152,17 +152,17 @@ $n[t] \forall 0 \leq t < len(s[t])$.
 \subsection{Fitting Parameters to a GLM}
 
 Fitting GLM parameters was accomplished using the \textit{statsmodels.api.GLM} function in
-Python using \textit{statsmodels.api.families.Poisson()} for the family parameter. Two
+Python using \\\textit{statsmodels.api.families.Poisson()} for the family parameter. Two
 matrices, one of exogenous variables and one of endogenous variables are passed to the fitting routine. Using the
 stimulus $s[t]$ and spike response $n[t]$ of length $l$, and filter length $d$, the matrices are constructed as
 follows:
 
 $$Exog=
 \begin{bmatrix}
-n[d-1] & n[d-2] & \hdots & n[0] & s[d-1] & s[d-2] & \hdots & s[0] \\
-n[d] & n[d-1] & \hdots & n[1] & s[d] & s[d-1] & \hdots & s[1] \\
-\vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
-n[l-2] & n[l-3] & \hdots & n[l-d-1] & s[l-2] & s[l-3] & \hdots & s[l-d-1]
+n[d-1] & n[d-2] & \hdots & n[0] & s[d-1] & s[d-2] & \hdots & s[0] & 1\\
+n[d] & n[d-1] & \hdots & n[1] & s[d] & s[d-1] & \hdots & s[1] & 1\\
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+n[l-2] & n[l-3] & \hdots & n[l-d-1] & s[l-2] & s[l-3] & \hdots & s[l-d-1] & 1
 \end{bmatrix}$$
 
 $$Endog=
@@ -199,20 +199,20 @@ datasets. No analysis tools besides those developed in the previous section were
 \subsection{Inter-Spike Interval Analysis}
 
 The inter-spike intervals were calculated by taking the difference between the spike times that were loaded from
-ISIsimulated.txt. Then, the correlation between successive intervals was taken with NumPy's corrcoef function.
+ISIsimulated.txt. Then, the correlation between successive intervals was taken with NumPy's \textit{corrcoef} function.
 The correlation was nearly zero, which makes sense because the spike times were generated using a renewal process,
-so the intervals should be independent of each other. Then, the histogram was plotted using Matplotlib's histogram
-function. Looking at the histogram, it appeared to roughly follow a gamma distribution. SciPy's gamma.fit function
+so the intervals should be independent of each other. Then, the histogram was plotted using Matplotlib's \textit{histogram}
+function. Looking at the histogram, it appeared to roughly follow a gamma distribution. SciPy's \textit{stats.gamma.fit function}
 was used to fit the histogram to a gamma distribution, which was then overlayed on the histogram. Lastly, the
 goodness of fit was measured using a Kolmogorov-Smirnov test.
 
 \section{References}
 
 \begin{itemize}
-\item NumPy: \url{https://www.numpy.org/}
-\item Matplotlib: \url{https://matplotlib.org/}
-\item StatsModels: \url{https://www.statsmodels.org/}
-\item SciPy: \url{https://www.scipy.org/}
+\item \textbf{NumPy:} \url{https://www.numpy.org/}
+\item \textbf{Matplotlib:} \url{https://matplotlib.org/}
+\item \textbf{StatsModels:} \url{https://www.statsmodels.org/}
+\item \textbf{SciPy:} \url{https://www.scipy.org/}
 \end{itemize}
 
 \section{Appendices}
