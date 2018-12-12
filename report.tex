@@ -27,6 +27,11 @@ distribution of inter-spike intervals to a gamma distribution.
 
 \subsection{Simulating a GLM}
 
+A GLM is a mostly linear model with a non-linear element. The parameters in our model are filter coefficients in the
+linear portion of the model. There is a stimulus filter, which determines the system input's contribution, a self
+interaction filter which determine's the system output's contribution, and a constant offset. The first task was to
+select model parameters and simulate the system.
+
 We used stimulus filter $f[t]=20e^{-t}$, self interaction filter $h[t]=-200e^{-t}$, and offset $b=-15$ as the
 parameters to our GLM simulation. Filters were 15 coefficients long. The input stimulus was:
 
@@ -51,8 +56,8 @@ qualitatively plausible.
 
 A model was then fit to the simulated data. The coefficients and their standard error (Estimated series) are shown
 overlaid on the ground truth in Figure \ref{fig41}. The fit for the stimulus filter is good. The fit for the
-self interaction filter is extremely poor for the first few coefficients and quickly improves, although it is not as
-good as the fit to the stimulus filter. This can be explained by the fact that the optimization code depends on
+self interaction filter is extremely poor for the first few coefficients and quickly improved for subsequent
+coefficients. This can be explained by the fact that the optimization code depends on
 observations of various interarrival times in order to estimate these coefficients. Due to the model's refractory
 period, there are no or few observations for short interarrivals. By contrast, any spike in the response is a useful
 observation for optimizing any of the stimulus filter coefficients, which is why their fits are more consistently good.
@@ -80,8 +85,8 @@ datasets, but RMSE for the stimulus filter only has a clear downward trend as th
 suggesting that the total number of observations is more significant than the number of spikes for fitting the stimulus
 filter. By contrast, slight downward trends in RMSE of the self interaction filter are observable in both datasets,
 suggesting that the number of spikes observed is more significant than total number of samples in fitting the self
-interaction filters. Another interesting feature of the plots is that response filter fits tend to be better,
-suggesting that the self interaction is harder to fit.
+interaction filters. Another interesting feature of the plots is that self interaction filter fits tend to be better,
+suggesting that the stimulus filter is harder to fit.
 
 \subsection{GLM Fits of Neural Data}
 
